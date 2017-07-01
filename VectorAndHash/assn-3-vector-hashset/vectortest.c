@@ -398,7 +398,7 @@ static void MemoryTest()
  * --------------
  * The enrty point into the test application.  The
  * first test is easy, the second one is medium, and
- 8 the final test is hard.
+ * the final test is hard.
  */
 
 int main(int ignored, char **alsoIgnored) 
@@ -408,4 +408,3 @@ int main(int ignored, char **alsoIgnored)
   MemoryTest();
   return 0;
 }
-
