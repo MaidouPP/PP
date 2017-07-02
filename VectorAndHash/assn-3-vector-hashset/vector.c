@@ -68,7 +68,7 @@ void VectorDelete(vector *v, int position)
   if(v->freeFn != NULL)
     v->freeFn(VectorNth(v, position));
   // v->logLength--;
-  memmove(VectorNth(v, position), VectorNth(v, position+1), v->logLength-position-1);
+  memmove(VectorNth(v, position), VectorNth(v, position+1), v->elemSize * (v->logLength-position-1));
   v->logLength--;
 }
 
