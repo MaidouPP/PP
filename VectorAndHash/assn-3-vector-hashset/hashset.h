@@ -73,7 +73,12 @@ typedef void (*HashSetFreeFunction)(void *elemAddr);
  */
 
 typedef struct {
-  // to be filled in by you
+  vector* buckets;  // hashset
+  int elemSize;
+  int numBuckets;
+  HashSetHashFunction hashfn;
+  HashSetCompareFunction comparefn;
+  HashSetFreeFunction freefn;
 } hashset;
 
 /**
@@ -159,7 +164,7 @@ int HashSetCount(const hashset *h);
  * for the element that is out of the [0, numBuckets) range.
  */
 
-void HashSetEnter(hashset *h, const void *elemAddr);
+void HashSetEnter(hashset *h, const void *elemAddr, const void *found);
 
 /**
  * Function: HashSetLookup
@@ -195,5 +200,7 @@ void *HashSetLookup(const hashset *h, const void *elemAddr);
  */
 
 void HashSetMap(hashset *h, HashSetMapFunction mapfn, void *auxData);
+
+vector* HashSetNthBucket(hashset *h, int idx);
      
 #endif

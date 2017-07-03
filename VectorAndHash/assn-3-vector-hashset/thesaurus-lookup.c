@@ -125,7 +125,7 @@ static void TokenizeAndBuildThesaurus(hashset *thesaurus, streamtokenizer *st)
       char *synonym = strdup(buffer);
       VectorAppend(&entry.synonyms, &synonym);
     }
-    HashSetEnter(thesaurus, &entry);
+    HashSetEnter(thesaurus, &entry, NULL);
     if (HashSetCount(thesaurus) % 1000 == 0) {
       printf(".");
       fflush(stdout);

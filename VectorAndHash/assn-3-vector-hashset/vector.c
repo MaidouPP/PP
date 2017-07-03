@@ -54,11 +54,11 @@ void VectorInsert(vector *v, const void *elemAddr, int position)
 
 void VectorAppend(vector *v, const void *elemAddr)
 {
-  if(v->logLength == v->allocLength) {
+  if(v->logLength >= v->allocLength) {
     v->allocLength *= 2;
     v->elems = realloc(v->elems, v->allocLength * v->elemSize);
   }
-  memcpy((char*)v->elems + (v->elemSize * v->logLength), elemAddr, v->elemSize);
+  memcpy(VectorNth(v, v->logLength), elemAddr, v->elemSize);
   v->logLength++;
 }
 
@@ -92,7 +92,7 @@ static int vectorIndex(void* found, void* base, int elemSize) {
 static const int kNotFound = -1;
 int VectorSearch(const vector *v, const void *key, VectorCompareFunction searchFn, int startIndex, bool isSorted)
 {
-  assert(startIndex>=0 && startIndex<v->logLength);
+  assert(startIndex>=0 && startIndex<=v->logLength);
   assert(key != NULL && searchFn != NULL);
   void* found = NULL;
   if(isSorted) {

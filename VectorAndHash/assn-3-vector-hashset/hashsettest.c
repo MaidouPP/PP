@@ -104,7 +104,7 @@ static void BuildTableOfLetterCounts(hashset *counts)
       found = (struct frequency *) HashSetLookup(counts, &localFreq);	
       if (found != NULL) 		// increment if already there 
 	localFreq.occurrences = found->occurrences + 1;
-      HashSetEnter(counts, &localFreq); // enter should overwrite if needed
+      HashSetEnter(counts, &localFreq, found); // enter should overwrite if needed
     }
   }
   
